@@ -1,0 +1,51 @@
+1. Функция "capitilize" переводит все символы кроме 1-го в нижний регистр.
+
+Test case: 'hello, World!'
+Expected Result: 'Hello, World!'
+Actual Result: 'Hello, world!'
+
+AssertionError: assert 'Hello, world!' == 'Hello, World!'
+
+Требуется уточнение ожидаемого результата при вызове функции
+
+2. Функция "to_list" завершается с ошибкой, когда передаваемый разделитель пустая строка ""
+
+Test case: string = 'abc', delimeter = "" 
+Expected Result: ['abc']
+Actual Result: завершается с ошибкой
+
+ValueError: empty separator
+
+3. Функция "contains" не обрабатывает случай, когда искомый символ пустая строка ""
+
+Test case: string = 'some text', symbol = "" 
+Expected Result: False
+Actual Result: True
+
+AssertionError: assert True == False
+
+4. Функция "starts_with" не обрабатывает случай, когда передаваемый символ пустая строка ""
+
+Test case: string = 'string empty', symbol = "" 
+Expected Result: False
+Actual Result: True
+
+AssertionError: assert True == False
+
+5. Функция "end_with" не обрабатывает случай, когда передаваемый символ пустая строка ""
+
+Test case: string = 'end empty', symbol = "" 
+Expected Result: False
+Actual Result: True
+
+AssertionError: assert True == False
+
+
+
+_______________
+
+При реализации функции "trim" предлагаю рассмотреть вариант использования 
+метода lstrip
+
+Тесты, которые проверяют вызов функций с неверным типом аргументов, отмечены маркером xfail. 
+Требуется уточнение о целесообранозности проведения данных тестов.
