@@ -1,0 +1,5 @@
+Локатор кнопки Войти - <header div[data-widget="profileMenuAnonymous"]>
+Локатор кнопки Заказы - <header div[data-widget="orderInfo"]>
+Локатор ссылки OZON Job (в футере) - <footer div.fd2 a[href="https://job.ozon.ru/?perehod=footer"]>
+Локатор выбора валюты (верхний левый угол страницы) - <div[role="navigation"] button[data-widget="selectedCurrency"]>
+Локатор выпадашки Везде (в поисковой строке) - <form[action="/search"] div.yy5>
