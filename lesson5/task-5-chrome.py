@@ -11,9 +11,7 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 driver.get(urlAddress)
 
-field_locator = 'input[type="number"]'
-
-field = driver.find_element(By.CSS_SELECTOR, field_locator)
+field = driver.find_element(By.CSS_SELECTOR, 'input[type="number"]')
 
 field.send_keys('1000')
 sleep(1)

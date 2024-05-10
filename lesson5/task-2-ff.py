@@ -12,10 +12,8 @@ driver = webdriver.Firefox(options=options)
 
 driver.get(urlAddress)
 
-btn_locator = 'button.btn-primary'
-
 for i in range(0, count):
-  click_btn = driver.find_element(By.CSS_SELECTOR, btn_locator)
+  click_btn = driver.find_element(By.CSS_SELECTOR, 'button.btn-primary')
   click_btn.click()
   print(click_btn.get_attribute('id'))
   driver.refresh()

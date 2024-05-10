@@ -11,13 +11,9 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 driver.get(urlAddress)
 
-username_field_locator = '#username'
-pass_field_locator = '#password'
-login_btn_locator = 'form#login button[type="submit"]'
-
-driver.find_element(By.CSS_SELECTOR, username_field_locator).send_keys('tomsmith')
-driver.find_element(By.CSS_SELECTOR, pass_field_locator).send_keys('SuperSecretPassword!')
-driver.find_element(By.CSS_SELECTOR, login_btn_locator).click()
+driver.find_element(By.CSS_SELECTOR, '#username').send_keys('tomsmith')
+driver.find_element(By.CSS_SELECTOR, '#password').send_keys('SuperSecretPassword!')
+driver.find_element(By.CSS_SELECTOR, 'form#login button[type="submit"]').click()
 
 if driver.current_url.split('/')[-1] == 'secure':
   print('success login')

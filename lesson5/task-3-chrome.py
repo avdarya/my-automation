@@ -13,11 +13,9 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 driver.get(urlAddress)
 
-blue_btn_locator = '.btn-primary'
-
 try:
   for i in range(0, count):
-    blue_btn = driver.find_element(By.CSS_SELECTOR, blue_btn_locator)
+    blue_btn = driver.find_element(By.CSS_SELECTOR, '.btn-primary')
     blue_btn.click()
     
     wait = WebDriverWait(driver, 1)

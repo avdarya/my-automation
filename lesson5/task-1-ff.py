@@ -12,14 +12,11 @@ driver = webdriver.Firefox(options=options)
 
 driver.get(urlAddress)
 
-add_btn_locator = 'button[onclick="addElement()"]'
-delete_btn_locator = 'button.added-manually'
-
-add_btn = driver.find_element(By.CSS_SELECTOR, add_btn_locator)
+add_btn = driver.find_element(By.CSS_SELECTOR, 'button[onclick="addElement()"]')
 for i in range(0, count):
   add_btn.click()
 
-delete_btns = driver.find_elements(By.CSS_SELECTOR, delete_btn_locator)
+delete_btns = driver.find_elements(By.CSS_SELECTOR, 'button.added-manually')
 print(len(delete_btns))
 
 sleep(10)

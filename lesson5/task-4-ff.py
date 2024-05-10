@@ -13,14 +13,11 @@ driver = webdriver.Firefox(options=options)
 
 driver.get(urlAddress)
 
-close_btn_locator = 'div.modal-footer p'
-modal_locator = '#modal'
-
 wait = WebDriverWait(driver, 2)
-wait.until(EC.visibility_of(driver.find_element(By.CSS_SELECTOR, modal_locator)))
+wait.until(EC.visibility_of(driver.find_element(By.CSS_SELECTOR, '#modal')))
 
 sleep(1)
-close_btn = driver.find_element(By.CSS_SELECTOR, close_btn_locator)
+close_btn = driver.find_element(By.CSS_SELECTOR, 'div.modal-footer p')
 close_btn.click()
 
 sleep(10)
