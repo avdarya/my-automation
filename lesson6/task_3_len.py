@@ -20,8 +20,11 @@ def check_len(browser: WebDriver) -> bool:
 wait = WebDriverWait(driver, 40, 1)
 wait.until(check_len)
 
-images = driver.find_elements(By.CSS_SELECTOR, '#image-container img')
-src_3 = images[2].get_attribute('src')
-print(src_3)
+# images = driver.find_elements(By.CSS_SELECTOR, '#image-container img')
+# src_3 = images[2].get_attribute('src')
+# print(src_3)
+
+src_award = driver.find_element(By.CSS_SELECTOR, '#award').get_attribute('src')
+print(src_award)
 
 driver.quit()
