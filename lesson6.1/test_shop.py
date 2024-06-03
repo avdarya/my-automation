@@ -19,7 +19,6 @@ from selenium.webdriver.common.by import By
 )
 def test_purchase(login, password, goods, first_name, last_name, zip_code, total):
   driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    
   driver.get('https://www.saucedemo.com/')
 
   driver.find_element(By.CSS_SELECTOR, 'input#user-name').send_keys(login)
@@ -44,7 +43,6 @@ def test_purchase(login, password, goods, first_name, last_name, zip_code, total
   driver.find_element(By.CSS_SELECTOR, '#postal-code').clear()
   driver.find_element(By.CSS_SELECTOR, '#postal-code').send_keys(zip_code)
   driver.find_element(By.CSS_SELECTOR, '#continue').click()
-  
   assert total in driver.find_element(By.CSS_SELECTOR, 'div.summary_total_label').text
 
   driver.quit()
