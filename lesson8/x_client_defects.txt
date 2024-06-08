@@ -1,0 +1,75 @@
+1. В тесте "Добавление нового сотрудника со всеми заполненными полями" в поле email устанавливается пустое значение
+
+Test case:
+  test_add_employee_all_field(
+    company_name='Sky Pro'
+    first_name='Petr'
+    last_name='Ivanov'
+    middle_name='Ivanovich'
+    url='https://test.com'
+    phone='8 999 999 99 99'
+    birthdate='1990-06-07'
+    is_active=True
+    email='test@mail.ru'
+    username='bloom'
+    password='fire-fairy'
+  )
+Expected Result: created employee email = 'test@mail.ru'
+Actual Result: created employee email = None
+
+AssertionError: assert None == 'test@mail.ru'
+
+2. В тесте "Добавление нового сотрудника только с обязательными полями" возвращается статус код 500
+ 
+Согласно документации обязательные поля: first_name, last_name, company_id.
+Поля id, isActive устанавливаются по умолчанию.
+
+Test case: 
+  test_add_employee_required_fields(
+    company_name='Sky Pro',
+    first_name='Petr',
+    last_name='Ivanov',
+    username='bloom',
+    password='fire-fairy'
+  )
+Expected Result: response.status_code == 201
+Actual Result: завершается с ошибкой, response.status_code = 500
+
+assert 500 == 201
+
+3. В тестах на редактирование информации о сотруднике в поле телефон не обновляется значение
+
+Test case:
+  test_edit_employee_phone(
+    company_name='Company Test',  
+    first_name='Alex',  
+    last_name='Ivanov',  
+    phone='8 999 999 99 99',  
+    new_phone='8 912 354 34 32',
+    username='bloom',  
+    password='fire-fairy',
+  )
+Expected Result: edited employee phone = '8 912 354 34 32'
+Actual Result: edited employee phone = '8 999 999 99 99'
+
+AssertionError: assert '8 999 999 99 99' == '8 912 354 34 32'
+
+4. В тестах на редактирование информации о сотруднике возвращается ответ со статус кодом 200
+
+Test case: 
+  test_edit_employee_last_name(
+    company_name='Company Test',  
+    first_name='Alex',  
+    last_name='Ivanov',  
+    phone='8 999 999 99 99',  
+    new_last_name='Voronov',  
+    username='bloom',  
+    password='fire-fairy'
+  )
+Expected Result: 201 (по документации)
+Actual Result: 200
+
+assert 200 == 201
+
+
+
