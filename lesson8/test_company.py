@@ -2,7 +2,7 @@ import pytest
 from modules.employee_api import EmployeeApi
 from modules.auth_api import AuthApi
 from modules.company_api import CompanyApi
-from shared.helper_functions import get_auth_header
+from get_auth_header import get_auth_header
 
 
 base_url = 'https://x-clients-be.onrender.com'
