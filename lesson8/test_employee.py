@@ -25,9 +25,9 @@ def test_get_employees_by_company(company_name: str, first_name: str, last_name:
     'companyId': company.json()['id'],
     'phone': phone
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
 
-  empl_by_company = empoyee_api.get_employees_by_company(company.json()['id'])
+  empl_by_company = empoyee_api.get_by_company(company.json()['id'])
   
   assert empl_by_company.status_code == 200
   assert len(empl_by_company.json()) > 0
@@ -78,7 +78,7 @@ def test_add_employee_all_field(
   token = auth_api.get_token(username, password)
   company = company_api.create_company(get_auth_header(token), company_name)
 
-  res_before = empoyee_api.get_employees_by_company(company.json()['id'])
+  res_before = empoyee_api.get_by_company(company.json()['id'])
   body_before = res_before.json()
 
   body = {
@@ -92,9 +92,9 @@ def test_add_employee_all_field(
     'birthdate': birthdate,
     'isActive': is_active
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
 
-  res_after = empoyee_api.get_employees_by_company(company.json()['id'])
+  res_after = empoyee_api.get_by_company(company.json()['id'])
   body_after = res_after.json()
   
   assert employee.status_code == 201
@@ -119,7 +119,7 @@ def test_add_employee_required_fields(company_name: str, first_name: str, last_n
   token = auth_api.get_token(username, password)
   company = company_api.create_company(get_auth_header(token), company_name)
 
-  res_before = empoyee_api.get_employees_by_company(company.json()['id'])
+  res_before = empoyee_api.get_by_company(company.json()['id'])
   body_before = res_before.json()
 
   body = {
@@ -127,9 +127,9 @@ def test_add_employee_required_fields(company_name: str, first_name: str, last_n
     'lastName': last_name,
     'companyId': company.json()['id']
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
 
-  res_after = empoyee_api.get_employees_by_company(company.json()['id'])
+  res_after = empoyee_api.get_by_company(company.json()['id'])
   body_after = res_after.json()
   
   assert employee.status_code == 201
@@ -158,7 +158,7 @@ def test_add_employee_whiout_first_name(company_name: str, last_name: str, phone
     'companyId': company.json()['id'],
     'phone': phone
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
   
   assert employee.status_code == 500
   
@@ -174,7 +174,7 @@ def test_add_employee_whiout_last_name(company_name: str, first_name: str, phone
     'companyId': company.json()['id'],
     'phone': phone
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
   
   assert employee.status_code == 500
   
@@ -189,7 +189,7 @@ def test_add_employee_without_company_id(first_name: str, last_name: str, phone:
     'lastName': last_name,
     'phone': phone
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
   
   assert employee.status_code == 500
   
@@ -206,9 +206,9 @@ def test_get_employee_by_id(company_name: str, first_name: str, last_name: str, 
     'companyId': company.json()['id'],
     'phone': phone
   }
-  employee = empoyee_api.create_employee(get_auth_header(token), body=body)
+  employee = empoyee_api.create(get_auth_header(token), body=body)
 
-  empl_by_id = empoyee_api.get_employee_by_id(employee.json()['id'])
+  empl_by_id = empoyee_api.get_by_id(employee.json()['id'])
 
   assert empl_by_id.status_code == 200
   assert empl_by_id.json()['id'] == employee.json()['id']
@@ -273,7 +273,7 @@ def test_edit_employee_all_fields(
     'url': url,
     'phone': phone
 }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {
     'lastName': new_last_name,
@@ -282,9 +282,9 @@ def test_edit_employee_all_fields(
     'phone': new_phone,
     'isActive': False
   }
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert edited_employee.status_code == 200
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
@@ -316,12 +316,12 @@ def test_edit_employee_last_name(
     'companyId': company.json()['id'],
     'phone': phone
   }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {'lastName': new_last_name}
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
   assert employee_by_id.json()['lastName'] == new_last_name
@@ -353,12 +353,12 @@ def test_edit_employee_email(
     'email': email,
     'phone': phone
   }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {'email': new_email}
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
   assert employee_by_id.json()['email'] == new_email
@@ -391,12 +391,12 @@ def test_edit_employee_url(
     'url': url,
     'phone': phone
   }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {'url': new_url}
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
   assert employee_by_id.json()['avatar_url'] == new_url
@@ -427,12 +427,12 @@ def test_edit_employee_phone(
     'companyId': company.json()['id'],
     'phone': phone
 }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {'phone': new_phone}
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
   assert employee_by_id.json()['phone'] == new_phone
@@ -455,12 +455,12 @@ def test_edit_employee_status(company_name: str, first_name: str, last_name: str
     'phone': phone,
     'isActive': True
 }
-  old_employee = empoyee_api.create_employee(get_auth_header(token), body=old_body)
+  old_employee = empoyee_api.create(get_auth_header(token), body=old_body)
 
   edited_body = {'isActive': False}
-  edited_employee = empoyee_api.edit_employee(get_auth_header(token), old_employee.json()['id'], edited_body)
+  edited_employee = empoyee_api.edit(get_auth_header(token), old_employee.json()['id'], edited_body)
 
-  employee_by_id = empoyee_api.get_employee_by_id(edited_employee.json()['id'])
+  employee_by_id = empoyee_api.get_by_id(edited_employee.json()['id'])
 
   assert employee_by_id.json()['id'] == edited_employee.json()['id']
   assert employee_by_id.json()['phone'] == phone
