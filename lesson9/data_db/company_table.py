@@ -8,9 +8,16 @@ class CompanyTable:
     self.__db = create_engine(connection_str)
     
   def get_companies(self) -> Sequence[RowMapping]:
-    with self.__db.connect() as conn:
-      result = conn.execute(text('select * from company where deleted_at isnull')).mappings().all()
-      return result
+    try:
+      with self.__db.connect() as conn:
+        result = conn.execute(text('select * from company where deleted_at isnull')).mappings().all()
+        return result
+    except Exception as _ex:
+      print('[INFO] Error - can\'t work with SQL ' , _ex)
+    finally:
+      if conn:
+        conn.close()
+        
   
   def get_active_companies(self) -> Sequence[RowMapping]:
     with self.__db.connect() as conn:
